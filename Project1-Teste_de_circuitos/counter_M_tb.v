@@ -8,7 +8,7 @@ module counter_M_tb;
 
     counter_M cnt1 (
         .clk(clk),
-        .Reset(reset),
+        .reset(reset),
         .enable(enable),
         .carry_out_M(carry_out_M),
         .count_M(count_M)
