@@ -71,8 +71,6 @@ module top_tb;
         #3 start = 1;
         #3 start = 0;
         #3 start = 1;
-        #33 start = 0;
-        #3 start = 0;
         #400 $finish;
     end
     always #2 clk = ~clk;

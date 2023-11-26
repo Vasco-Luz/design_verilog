@@ -1,5 +1,3 @@
-
-
 module state_machine_2( //inputs do block state machine
     input clk, //clock signal
     input start, // start signal
@@ -9,19 +7,17 @@ module state_machine_2( //inputs do block state machine
     input wire carry_out_M, // cary out M do contador
     input wire [3:0] count_M, // valor do contador M
     output reg OUT, // val OUT
-    output reg BIST_END,//BIST end
+    output reg BIST_END, //BIST end
     output reg Running,// variavel se esta a correr
     output reg [1:0] state, // so para verificar o state no testbench
     output reg [1:0] next_state,//so para verificar o next_state no testbench
     output reg enable_count_N, //enabler do counter N
-    output reg enable_count_M// enables do counter ;
+    output reg enable_count_M // enables do counter M
 );
-localparam [1:0] IDLE=0, counting_N=1,
-counting_M=2, finish=3;//nome dos estados
-
+localparam [1:0] IDLE=0, counting_N=1, counting_M=2, finish=3; //nome dos estados
 
 always @(posedge clk or posedge reset) begin
-    if((reset == 1'b1))begin // reseta sincronamente com o reset, quando reseta muda instantanniamente os valores dos outputs
+    if((reset == 1'b1))begin // reseta sincronamente com o reset, quando reseta muda instantaneamente os valores dos outputs, do shift reg e dos contadores
         state <= IDLE;
         Running = 0;
         OUT = 0;
@@ -34,7 +30,7 @@ end
 always @(*) begin
     case (state)
         IDLE: begin
-            if((start_val[1:0] == 2'b01) && (Running == 1'b0))begin 
+            if((start_val[1:0] == 2'b01) && (Running == 1'b0))begin // so começa quando existe uma variacao 0-1 do start e Running a 0
                 next_state = counting_N;
                 enable_count_N = 1;
                 enable_count_M = 0;
@@ -53,7 +49,6 @@ always @(*) begin
             Running = 1;
             OUT = 1;
             BIST_END = 0;
-
             if (carry_out_N == 1'b1) begin
                 if(count_M == 4'd12)begin
                     next_state = finish;
@@ -115,10 +110,4 @@ always @(*) begin
         default: next_state = IDLE;
     endcase
 end
-
-
-
-
-
-
 endmodule
