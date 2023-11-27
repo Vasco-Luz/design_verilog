@@ -1,11 +1,7 @@
 `timescale 1ns / 100ps
 
 
-
-
-
 module top_tb;
-
 
     reg clk, start,reset;
     wire carry_out_M,carry_out_N,enable_count_M,enable_count_N,OUT,BIST_END,Running;
