@@ -76,22 +76,10 @@ always @(*) begin
         counting_M: begin
             next_state = counting_N;
             enable_count_M = 0;
-            if ((carry_out_N == 1'b1) &&(count_M == 4'd12)) begin
-                next_state = finish;
-                enable_count_N = 0;
-                enable_count_M = 0;
-                Running = 0;
-                OUT = 0;
-                BIST_END = 1;
-
-            end
-            else begin
-                next_state = counting_N;
-                enable_count_N = 1;
-                Running = 1;
-                OUT = 1;
-                BIST_END = 0;
-            end
+            enable_count_N = 1;
+            Running = 1;
+            OUT = 1;
+            BIST_END = 0;
         end
         finish: begin
             if(start_val[1:0] == 2'b01)begin

@@ -1,0 +1,7 @@
+#
+# Edit the name of the module instantiated in your testbench
+#
+select_coverage -block -instance controller_tb:uut
+set_branch_scoring
+set_statement_scoring
+select_fsm
